@@ -1,0 +1,24 @@
+{
+  "name": "equation_bot",
+  "version": "1.0.0",
+  "description": "방정식 문제봇",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/opus": "^0.9.0",
+    "@discordjs/voice": "^0.16.0",
+    "axios": "^1.4.0",
+    "discord.js": "^14.9.0",
+    "ffmpeg": "^0.0.4",
+    "ffmpeg-static": "^5.2.0",
+    "jsdoc": "^4.0.2",
+    "libsodium-wrappers": "^0.7.11",
+    "mathjs": "^11.8.0",
+    "poly-mult-fft": "^1.0.0",
+    "wolfram-alpha-api": "^0.2.1"
+  }
+}
