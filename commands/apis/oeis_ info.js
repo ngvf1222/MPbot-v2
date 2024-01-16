@@ -25,7 +25,7 @@ module.exports = {
     //console.log(`https://oeis.org/search?q=id:${id}&fmt=json`,info,info.data)
     info=info.data.results[0]
     infos=Object.keys(info).map((e,i)=>{return {name:e,value: (Array.isArray(info[e]))?info[e].join('\n'):''+info[e],inline: true}})
-    console.log(infos)
+    //console.log(infos)
     const infoEmbed = new EmbedBuilder()
       .setColor(0x0099FF)
       .setTitle(id)

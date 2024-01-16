@@ -15,6 +15,7 @@
     "discord.js": "^14.9.0",
     "ffmpeg": "^0.0.4",
     "ffmpeg-static": "^5.2.0",
+    "firebase": "^10.7.1",
     "jsdoc": "^4.0.2",
     "libsodium-wrappers": "^0.7.11",
     "mathjs": "^11.8.0",

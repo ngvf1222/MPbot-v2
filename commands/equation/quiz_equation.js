@@ -1,5 +1,20 @@
 const { SlashCommandBuilder,EmbedBuilder } = require('discord.js');
 const mult = require("poly-mult-fft")
+// Import the functions you need from the SDKs you need
+const { initializeApp } = require("firebase/app");
+const { firebaseConfig }=require("../../config.json")
+const { getFirestore } =require("firebase/firestore")
+const { collection, setDoc, doc } =require("firebase/firestore"); 
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+
+
+
+// Initialize Firebase
+initializeApp(firebaseConfig);
+const db=getFirestore()
 const {generate_equation,equation_to_string,Solutions_to_string,Synthetic_division,Synthetic_division_to_string} = require('../../equation/equation')
 const min_value=-10
 const max_value=10
@@ -116,10 +131,20 @@ ${make_foli(data.Expansion,solution.filter(e=>e[1]==1),solution.filter(e=>e[1]!=
 		const collector = interaction.channel.createMessageCollector({ filter: collectorFilter, time: 1000*60*interaction.options.getInteger('차수') });
 		let start_time=new Date().getTime()
 		let correct_flag=false
-		collector.on('collect', m => {
+		collector.on('collect', async m => {
 			if(JSON.stringify([...text_solution].sort())===JSON.stringify([...text_to_solutions(m.content)].sort())){
 				console.log(`${m.author}님에 정답!`)
-				m.reply({ embeds:[answer_embed(true,(new Date().getTime()-start_time)/1000)]})
+				console.log(m)
+				const time=(new Date().getTime()-start_time)/1000
+				// const scoreRef = collection(db,'score',m.guildId)//db.collection('score').doc(m.guildId)
+				//이거 안되뮤ㅠ
+				const data={[`${interaction.options.getInteger('차수')}.${m.author.id}`]:time,}
+				await setDoc(doc(db, "score", m.author.id), {
+					[`scores.${interaction.options.getInteger('차수')}`]:time,
+					name:m.author.username,
+					id:m.author.id
+				}, {merge: true});
+				m.reply({ embeds:[answer_embed(true,time)]})
 				correct_flag=true
 				collector.stop()
 			}else{

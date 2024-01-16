@@ -109,7 +109,6 @@ function equation_to_string(equation){
 function Solutions_to_string(solutions){
     let k=1
     const irreducible=(e)=>{
-        console.log('a',e)
         const gcdf = (a, b) => a % b === 0 ? b : gcdf(b, a % b);
         const gcd=gcdf(e[0],e[1])
         k*=gcd
